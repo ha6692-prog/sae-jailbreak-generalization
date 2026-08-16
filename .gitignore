@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment / secrets
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large ML/model files
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+
+# Hugging Face cache
+.cache/
+huggingface/
+transformers_cache/
+
+# Generated datasets / large artifacts
+# Uncomment if datasets become too large for Git
+# data/raw/
+# data/processed/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
