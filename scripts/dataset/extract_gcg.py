@@ -1,3 +1,4 @@
+from pathlib import Path
 import jailbreakbench as jbb
 import pandas as pd
 
@@ -20,14 +21,14 @@ for i, jailbreak in enumerate(artifact.jailbreaks):
         "attack_method": "GCG"
     })
 
+project_root = Path(__file__).resolve().parents[2]
+output_csv = project_root / "data" / "raw" / "gcg_vicuna_jailbreaks.csv"
+
 df = pd.DataFrame(data)
-df.to_csv(
-    "gcg_vicuna_jailbreaks.csv",
-    index=False
-)
+df.to_csv(output_csv, index=False)
 
 print("\nSaved!")
-print("File: gcg_vicuna_jailbreaks.csv")
+print("File:", output_csv)
 print("Rows:", len(df))
 print("\nFirst 3 prompts:")
 for i in range(min(3, len(df))):

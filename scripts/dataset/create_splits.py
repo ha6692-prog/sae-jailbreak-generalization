@@ -1,8 +1,15 @@
+from pathlib import Path
 import numpy as np
 import pandas as pd
 
-# Load combined dataset
-df = pd.read_csv("combined_jailbreak_dataset.csv")
+ROOT = Path(__file__).resolve().parents[2]
+INPUT_FILE = ROOT / "data" / "processed" / "combined_jailbreak_dataset.csv"
+TRAIN_FILE = ROOT / "data" / "splits" / "train.csv"
+VALIDATION_FILE = ROOT / "data" / "splits" / "validation.csv"
+TEST_FILE = ROOT / "data" / "splits" / "test.csv"
+TRAIN_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+df = pd.read_csv(INPUT_FILE)
 
 behaviors = (
     df["behavior"]
@@ -47,6 +54,11 @@ print(validation_df["attack_family"].value_counts())
 print("\nTEST:")
 print(test_df["attack_family"].value_counts())
 
-train_df.to_csv("train.csv", index=False)
-validation_df.to_csv("validation.csv", index=False)
-test_df.to_csv("test.csv", index=False)
+train_df.to_csv(TRAIN_FILE, index=False)
+validation_df.to_csv(VALIDATION_FILE, index=False)
+test_df.to_csv(TEST_FILE, index=False)
+
+print("\nSaved splits to:")
+print(TRAIN_FILE)
+print(VALIDATION_FILE)
+print(TEST_FILE)

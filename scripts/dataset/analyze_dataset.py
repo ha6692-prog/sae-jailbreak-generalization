@@ -1,7 +1,7 @@
 from pathlib import Path
 import pandas as pd
-base_dir = Path(__file__).resolve().parent
-csv_path = base_dir / "pair_vicuna_jailbreaks_annotated.csv"
+project_root = Path(__file__).resolve().parents[2]
+csv_path = project_root / "data" / "processed" / "pair_vicuna_jailbreaks_annotated.csv"
 
 df = pd.read_csv(csv_path)
 

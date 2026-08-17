@@ -1,8 +1,11 @@
+from pathlib import Path
 import pandas as pd
 
-# Load both datasets
-pair = pd.read_csv("pair_vicuna_jailbreaks_final.csv")
-gcg = pd.read_csv("gcg_vicuna_jailbreaks_final.csv")
+project_root = Path(__file__).resolve().parents[2]
+processed_dir = project_root / "data" / "processed"
+
+pair = pd.read_csv(processed_dir / "pair_vicuna_jailbreaks_final.csv")
+gcg = pd.read_csv(processed_dir / "gcg_vicuna_jailbreaks_final.csv")
 
 # Ensure compatibility with the combine step
 if "attack_method" not in pair.columns:
@@ -44,11 +47,8 @@ combined = pd.concat(
     ignore_index=True
 )
 
-# Save
-combined.to_csv(
-    "combined_jailbreak_dataset.csv",
-    index=False
-)
+output_csv = processed_dir / "combined_jailbreak_dataset.csv"
+combined.to_csv(output_csv, index=False)
 
 print("================================")
 print("COMBINED DATASET CREATED")
@@ -60,3 +60,4 @@ print("\nMechanisms:")
 print(combined["primary_mechanism"].value_counts())
 print("\nJailbreak labels:")
 print(combined["jailbroken"].value_counts())
+print("\nSaved to:", output_csv)

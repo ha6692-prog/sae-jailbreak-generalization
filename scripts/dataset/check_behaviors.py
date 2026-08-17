@@ -1,6 +1,10 @@
+from pathlib import Path
 import pandas as pd
 
-df = pd.read_csv("combined_jailbreak_dataset.csv")
+project_root = Path(__file__).resolve().parents[2]
+input_csv = project_root / "data" / "processed" / "combined_jailbreak_dataset.csv"
+
+df = pd.read_csv(input_csv)
 print("Total rows:", len(df))
 print("\nUnique behaviors:")
 print(df["behavior"].nunique())

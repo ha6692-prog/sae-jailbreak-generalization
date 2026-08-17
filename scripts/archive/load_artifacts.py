@@ -1,3 +1,4 @@
+from pathlib import Path
 import jailbreakbench as jbb
 import pandas as pd
 
@@ -25,11 +26,11 @@ for i, jailbreak in enumerate(artifact.jailbreaks):
 
 df = pd.DataFrame(data)
 
-df.to_csv(
-    "pair_vicuna_jailbreaks.csv",
-    index=False
-)
+project_root = Path(__file__).resolve().parents[2]
+output_csv = project_root / "data" / "raw" / "pair_vicuna_jailbreaks.csv"
+
+df.to_csv(output_csv, index=False)
 
 print("\nSaved dataset!")
-print("File: pair_vicuna_jailbreaks.csv")
+print("File:", output_csv)
 print("Rows:", len(df))

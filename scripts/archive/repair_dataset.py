@@ -1,9 +1,9 @@
 import csv
 from pathlib import Path
 
-base_dir = Path(__file__).resolve().parent
-src = base_dir / 'pair_vicuna_jailbreaks.csv'
-dst = base_dir / 'pair_vicuna_jailbreaks_annotated.csv'
+project_root = Path(__file__).resolve().parents[2]
+src = project_root / 'data' / 'raw' / 'pair_vicuna_jailbreaks.csv'
+dst = project_root / 'data' / 'processed' / 'pair_vicuna_jailbreaks_annotated.csv'
 
 rows = []
 with src.open('r', newline='', encoding='utf-8') as f:

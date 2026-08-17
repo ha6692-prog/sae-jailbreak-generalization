@@ -1,7 +1,11 @@
+from pathlib import Path
 import pandas as pd
 
-# Load GCG dataset
-df = pd.read_csv("gcg_vicuna_jailbreaks.csv")
+project_root = Path(__file__).resolve().parents[2]
+raw_csv = project_root / "data" / "raw" / "gcg_vicuna_jailbreaks.csv"
+output_csv = project_root / "data" / "processed" / "gcg_vicuna_jailbreaks_annotated.csv"
+
+df = pd.read_csv(raw_csv)
 
 # Add attack metadata
 df["attack_source"] = "JailbreakBench"
@@ -25,14 +29,10 @@ df["notes"] = (
     "prompt contains an optimized/garbled suffix appended to the request."
 )
 
-# Save
-df.to_csv(
-    "gcg_vicuna_jailbreaks_annotated.csv",
-    index=False
-)
+df.to_csv(output_csv, index=False)
 
 print("GCG annotation complete!")
 print("Number of prompts:", len(df))
-print("Saved as: gcg_vicuna_jailbreaks_annotated.csv")
+print("Saved as:", output_csv)
 print("\nMechanism distribution:")
 print(df["primary_mechanism"].value_counts())
